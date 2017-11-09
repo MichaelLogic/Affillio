@@ -4,7 +4,7 @@ Affillio - The Market Hunter
 NodeJS Scraping Framework for Affiliate Marketing Apps
 
 <p align="center">
-  <img src="aflo_docs/affillio_nodejs_banner.jpg" alt="Affillio AI NodeJS Module" width="100%"/>
+  <img src="aflo-docs/affillio_nodejs_banner.jpg" alt="Affillio AI NodeJS Module" width="100%"/>
   <span style="font-size: 2em; font-color:red; font-weight:bold">
   	Under Heavy Construction
   </span>
