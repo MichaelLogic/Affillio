@@ -17,9 +17,8 @@ Getting Started
 ------------
 `npm install affillio`
 
-## Minor AfloCommerce Dev issues 
-- Login Authorization requires a refresh after sign in.  A polished emitter will be added soon 
-- needs to accomodate parent and child categories in the "Category" dropdown in shop
+## Major Affillio Dev issues 
+- Reorganization of Prey Class and its execution method
 
 - Heavy Affillio functions development in progress:  This open-source project has been exposed to empower technology firms currently working with Michael Logic™ Administration. Please be aware that this project is in version 0.1+ release and will change drastically at the publish of Affillio v.1.0.  
 
