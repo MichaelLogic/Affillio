@@ -1,0 +1,49 @@
+{
+  "name": "affillio",
+  "version": "0.1.0",
+  "description": "Scraping framework for affiliate marketing apps",
+  "main": "affillio.js",
+  "keywords": [
+    "mla",
+    "michael logic",
+    "affillio",
+    "webpack",
+    "typescript",
+    "hunters",
+    "prey",
+    "mission"
+  ],
+  "author": "Michael Logic™ <ml@michaellogic.com>",
+  "homepage": "http://michaellogic.com",
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "q": "^1.1.1",
+    "request": "^2.83.0",
+    "express": "^4.15.2",
+    "express-jwt": "^5.3.0",
+    "express-session": "^1.15.3",
+    "mongoose": "^4.11.0",
+
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.64",
+    "@types/node": "^7.0.13",
+    "@types/source-map": "^0.5.0",
+    "ts-node": "^3.0.2",
+    "tslib": "^1.6.1",
+    "tslint": "~4.5.1",
+    "tslint-loader": "^3.5.2",
+    "typedoc": "^0.7.1",
+    "typescript": "~2.3.2",
+   
+  },
+  "engines": {
+    "node": ">= 8.0.1",
+    "npm": ">= 5"
+  }
+}

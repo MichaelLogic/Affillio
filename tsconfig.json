@@ -1,0 +1,42 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "strictNullChecks": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "types": [
+      "hammerjs",
+      "jasmine",
+      "node",
+      "source-map",
+      "uglify-js",
+      "webpack"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
+  },
+  "buildOnSave": false
+}
