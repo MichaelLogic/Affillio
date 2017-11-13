@@ -1,25 +1,26 @@
 import * as _ from 'lodash';
 import * as q from 'q';
 import { OptionsTemplate } from './options-template';
-import { afloRequest } from 'request';
+import * as afloRequest from 'request';
 
 export class RequestWrap {
 
-	public defaults = {
-	  follow_max: 0,
-	  user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like '
-	  + 'Gecko) Chrome/41.0.2272.76 Safari/537.36',
-	  open_timeout: 60000
-	};
+	public defaults: {};
 	private _cookieJar: any;
 	private _log: Array<any>;
-	
 
   constructor(defaultCookies:any) {
   	
   	this._cookieJar = defaultCookies || {};
 
 	this._log = [];
+
+	this.defaults = {
+	  follow_max: 0,
+	  user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like '
+	  + 'Gecko) Chrome/41.0.2272.76 Safari/537.36',
+	  open_timeout: 60000
+	};
 
 	afloRequest.defaults(this.defaults);
 
@@ -98,14 +99,17 @@ export class RequestWrap {
 	    throw new Error('Url is not set');
 	  }
 
-	  opts = _.isObject(opts) ? opts : {};
+	  //opts = _.isObject(opts) ? opts : {};
 	  data = opts.data || null;
 
-	  finalOpts = _.omit(opts, ['data', 'url']);
-	  extendedCookies = _.extend(this._cookieJar, finalOpts.cookies);
-	  finalOpts.cookies = _.keys(extendedCookies).length > 0 ? extendedCookies : null;
-
-	  afloRequest.request(method, url, data, finalOpts, function (err, res, body) {
+	  //finalOpts = _.omit(opts, ['data', 'url']);
+	  //extendedCookies = _.extend(this._cookieJar, finalOpts.cookies);
+	  //finalOpts.cookies = _.keys(extendedCookies).length > 0 ? extendedCookies : null;
+	  
+	  // afloRequest.request(method, url, data, finalOpts, function (err, res, body) {
+	  //   thisReq.interceptResponse(err, res, body, url, data, makeRequest, callback);
+	  // });
+	  afloRequest(url, opts, function (err, res, body) {
 	    thisReq.interceptResponse(err, res, body, url, data, makeRequest, callback);
 	  });
 
@@ -117,7 +121,7 @@ export class RequestWrap {
 	}
 
 	get = (opts, callback) => {
-	  return this.request('get', opts, callback);
+	  return this.request('GET', opts, callback);
 	}
 
 	head = (opts, callback) => {

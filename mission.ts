@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import { HuntingTools } from './tools';
+import HuntingTools from './tools';
 import * as q from 'q';
-import { Events } from 'eventemitter3';
+import { EventEmitter2 } from 'eventemitter2';
 import { HuntDefinition } from './hunt-definition';
 
 export class Mission {
@@ -22,7 +22,6 @@ export class Mission {
   private __finishedHunts: any;
   private __cookieJar: any;
   private __componentsApplied: boolean;
-  private tools: HuntingTools;
   constructor(uid:string, hunter:any, params:any) {
 
   	/** Unique Mission identifier */
@@ -41,11 +40,12 @@ export class Mission {
       wildcard: true,
       delimiter: ':'
     };
-    //private events
-    this.__events = new Events(this.__eventsConfig);
+    //  //private events
+    this.__events = new EventEmitter2(this.__eventsConfig);
     //public events
-  	this.__publicEvents = new Events(this.__publicEventsConfig);
+  	this.__publicEvents = new EventEmitter2(this.__publicEventsConfig);
   	
+    //Current plan group idx - build execution queue default
   	this.__planIdx = -1;
 
   	this.__executionQueueIdx = -1;
@@ -95,10 +95,10 @@ export class Mission {
   * private
   * return {array} an array of Hunts
   */
-  buildHunt = (huntSpecs) => {
+  buildHunt = (huntId) => {
     let thisBuild, builderResponse, builderParams, clonedCookieJar, huntDefinition;
     thisBuild = this;
-    huntDefinition = this.__hunter._huntDefinitions[huntSpecs.huntId];
+    huntDefinition = this.__hunter._huntDefinitions[huntId];
 
     builderParams = {
       params: this.__params,
@@ -161,7 +161,7 @@ export class Mission {
     executionBlock = [];
 
     _.each(planGroup, function (huntSpecs:any) {
-      hunts = thisBuildEx.buildHunt(huntSpecs);
+      hunts = thisBuildEx.buildHunt(huntSpecs.huntId);
       previousObject = null;
 
       // Build all execution objects for a specific hunt and
@@ -368,6 +368,7 @@ export class Mission {
     this.__publicEvents.emit('mission:start');
     this.prepareRun();
     this.applyNextExecutionQueueBlock();
+    console.log("::: MISSION Started! ::::");
   }
 
   onMissionSuccess = () => {
@@ -498,7 +499,7 @@ export class Mission {
   }
 
   /**
-  * Verifies if the mission's enqueued hunts are present in it's agent
+  * Verifies if the mission's enqueued hunts are present in it's hunter
   * returns - {boolean} true if all enqueued hunts exist
   * private - 
   */
@@ -517,10 +518,10 @@ export class Mission {
   huntIsInPlan = function (huntId:string) {
     let hunts;
 
-    this.__applyComponents();
+    this.applyComponents();
 
     return _.some(this.__hunter._plan, function (planBlock:any) {
-      hunts = this.tools.arrayify(planBlock);
+      hunts = HuntingTools.makeArray(planBlock);
 
       return _.some(hunts, function (huntObject:any) {
         let planHuntId;
@@ -601,7 +602,7 @@ export class Mission {
 
     if (!this.huntIsInPlan(huntId)) {
       throw new Error('Enqueued hunt ' + huntId + ' is not in the hunter ' + this.__hunter.id +
-        '\'s plan' + ' add it to the agent\'s config array via the .setup method');
+        '\'s plan' + ' add it to the hunter\'s config array via the .setup method');
     }
 
     this.__enqueuedHunts.push(huntId);

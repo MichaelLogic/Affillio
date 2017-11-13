@@ -143,6 +143,8 @@ export class Hunt {
 	  } else {
 	    this.__runningDeferred.resolve(response);
 	  }
+
+	  console.log("Success Data >>  ", data);
 	};
 
 	onSaveCookies = () => {

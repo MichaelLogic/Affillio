@@ -5,7 +5,7 @@
 */
 
 import * as _ from 'lodash';
-import { HuntingTools } from './tools';
+import HuntingTools from './tools';
 import { Hunt } from './hunt';
 
 export class HuntDefinition {
@@ -13,7 +13,7 @@ export class HuntDefinition {
 	private __config: any;
 	private __main: any;
 	private __builder: any;
-	private tools: HuntingTools;
+	//private tools: HuntingTools;
 
 	constructor(id:string){
 
@@ -44,7 +44,7 @@ export class HuntDefinition {
 	  }
 
 	  hunts = [];
-	  paramSets = this.tools.makeArray(this.__builder(builderParams));
+	  paramSets = HuntingTools.makeArray(this.__builder(builderParams));
 
 	  _.each(paramSets, function (paramSet) {
 	    hunt = new Hunt(thisBuild.__id, thisBuild.__main, paramSet, cookieJar, thisBuild.__config, mission);
@@ -66,7 +66,7 @@ export class HuntDefinition {
 
 	/**
 	* Sets main hunt's method
-	* param - {function} mainMethod main hunt method, this contains the scraping logic that makes a hunt
+	* param - {function} mainMethod main hunt method, this contains the hunting logic that makes a hunt
 	* unique
 	*/
 	main = (mainMethod:any) => {

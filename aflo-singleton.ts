@@ -26,11 +26,6 @@ class AfloSingleton {
 	* return- {Agent} hunter instance
 	*/
 	hunter = (hunterId:string) => {
-	  // if (!hunterId || !_.isString(hunterId)) {
-	  //   throw new Error('Hunter id must be passed');
-	  // }
-
-	  // return this.hunter(hunterId);
 	  let thisHunter: Hunter;
 	  let hunterExists: boolean;
 	  if (!hunterId || !_.isString(hunterId)) {
@@ -57,12 +52,12 @@ class AfloSingleton {
 	  return this.hunter(hunterId).hunt(huntId);
 	}
 
-	/**
+	/*
 	* Instances a new mission
 	* param- {string} hunterId name of the hunter that will be used by the Mission
 	* return- {Mission} Mission instance that has been created
 	*/
-	mission = (hunterId:any, params:any) => {
+	mission = (hunterId:any, newMissionId:string, params?:any) => {
 	  let newId, hunter, newMission;
 
 	  if (!hunterId || !_.isString(hunterId)) {
@@ -79,8 +74,8 @@ class AfloSingleton {
 	    throw new Error('Agent ' + hunterId + ' doesn\'t exist.');
 	  }
 
-	  newId = new mongoose.Types.ObjectId();
-	  newMission = new Mission(newId, hunter, params);
+	  //newId = new mongoose.Types.ObjectId();
+	  newMission = new Mission(newMissionId, hunter, params);
 
 	  return newMission;
 	}

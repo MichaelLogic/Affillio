@@ -47,7 +47,7 @@ export class Hunter {
 	  formattedPlan = [];
 
 	  if (thisFormat.__config.plan.length <= 0) {
-	    throw new Error('Hunter ' + thisFormat.id + ' has no execution plan, use the hunter\'s plan method' +
+	    throw new Error('Hunter ' + thisFormat.hunterId + ' has no execution plan, use the hunter\'s plan method' +
 	      ' to define it');
 	  }
 
@@ -86,6 +86,7 @@ export class Hunter {
 
 	plan = (executionPlan:any) => {
 	  // TODO: Validate execution plan format right away
+
 	  if (!_.isArray(executionPlan)) {
 	    throw new Error('Hunter plan must be an array of hunt ids');
 	  }
