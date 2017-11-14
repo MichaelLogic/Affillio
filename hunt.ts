@@ -144,7 +144,7 @@ export class Hunt {
 	    this.__runningDeferred.resolve(response);
 	  }
 
-	  console.log("Success Data >>  ", data);
+	  console.log("Success Mission >>  ", data);
 	};
 
 	onSaveCookies = () => {

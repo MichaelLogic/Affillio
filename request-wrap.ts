@@ -15,14 +15,16 @@ export class RequestWrap {
 
 	this._log = [];
 
-	this.defaults = {
-	  follow_max: 0,
-	  user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like '
-	  + 'Gecko) Chrome/41.0.2272.76 Safari/537.36',
-	  open_timeout: 60000
-	};
+	// this.defaults = {
+	//   follow_max: 0,
+	//   user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like '
+	//   + 'Gecko) Chrome/41.0.2272.76 Safari/537.36',
+	//   open_timeout: 60000
+	// };
+	this.defaults = {};
 
-	afloRequest.defaults(this.defaults);
+	//afloRequest.defaults(this.defaults);
+	afloRequest.debug = true;
 
   }
 
@@ -105,11 +107,16 @@ export class RequestWrap {
 	  //finalOpts = _.omit(opts, ['data', 'url']);
 	  //extendedCookies = _.extend(this._cookieJar, finalOpts.cookies);
 	  //finalOpts.cookies = _.keys(extendedCookies).length > 0 ? extendedCookies : null;
-	  
-	  // afloRequest.request(method, url, data, finalOpts, function (err, res, body) {
-	  //   thisReq.interceptResponse(err, res, body, url, data, makeRequest, callback);
-	  // });
-	  afloRequest(url, opts, function (err, res, body) {
+
+	  let headReq = afloRequest.defaults({
+	  				headers: {
+	  					'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like '
+				  		+ 'Gecko) Chrome/41.0.2272.76 Safari/537.36',
+	  					'Connection': 'close'
+		  				}
+					});
+
+	  headReq(url, opts, function (err, res, body) {
 	    thisReq.interceptResponse(err, res, body, url, data, makeRequest, callback);
 	  });
 
